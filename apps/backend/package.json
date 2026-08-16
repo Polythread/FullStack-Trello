@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@repo/db": "*",
+    "@repo/common": "*",
     "express": "^5.2.1"
   }
 }
