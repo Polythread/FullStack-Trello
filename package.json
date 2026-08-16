@@ -1,5 +1,5 @@
 {
-  "name": "FullStack-Trello",
+  "name": "fullstack-trello",
   "private": true,
   "scripts": {
     "build": "turbo run build",
