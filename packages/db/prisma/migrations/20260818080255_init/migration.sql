@@ -13,7 +13,7 @@ CREATE TABLE "User" (
 -- CreateTable
 CREATE TABLE "Organization" (
     "id" TEXT NOT NULL,
-    "email" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
     "description" TEXT NOT NULL,
 
     CONSTRAINT "Organization_pkey" PRIMARY KEY ("id")

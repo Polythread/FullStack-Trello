@@ -21,7 +21,7 @@ memberships    Membership[]
 
 model Organization {
 id               String     @id   @default(uuid())
-email            String
+name             String
 description      String
 boards           Board[]
 memberships    Membership[]
