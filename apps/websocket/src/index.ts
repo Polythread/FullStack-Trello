@@ -4,6 +4,8 @@ import type { Request } from "express";
 import url from "url";
 import { WsError } from "./utilis/wsError";
 import jwt from "jsonwebtoken";
+import { joinRoom } from "./events/joinRoom";
+import { BOARD } from "./store";
 
 const wss = new WebSocketServer({ port: 8000 });
 
@@ -37,6 +39,34 @@ wss.on("connection", (ws: CustomWebSocket, req: Request) => {
     } catch (err) {
       ws.send(JSON.stringify(new WsError("Invalid message format")));
       return;
+    }
+
+    const { event, data } = parsed;
+
+    switch (event) {
+      case "JOIN_BOARD":
+        joinRoom(ws, data);
+        break;
+    }
+  });
+
+  ws.on("close", () => {
+    const userId = ws.user.id;
+    console.log(`Websocket Disconnected for user ${userId}`);
+
+    for (const boardId in BOARD) {
+      BOARD[boardId] = BOARD[boardId]!.filter((client) => client.ws != ws);
+
+      console.log(`User ${userId} removed from board ${boardId}`);
+
+      BOARD[boardId].forEach(({ ws: clientWs }) => {
+        clientWs.send(
+          JSON.stringify({
+            event: "LEAVE_BOARD",
+            userId,
+          }),
+        );
+      });
     }
   });
 });
