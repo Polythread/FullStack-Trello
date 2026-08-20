@@ -28,3 +28,9 @@ export const createOrg = async (req: Request, res: Response) => {
 
   return res.status(200).json(new ApiResponse({ organization }));
 };
+
+export const getOrg = async (req: Request, res: Response) => {
+  const orgs = await prisma.board.findMany();
+
+  return res.json(new ApiResponse({ orgs }));
+};

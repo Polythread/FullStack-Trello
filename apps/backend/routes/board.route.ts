@@ -1,10 +1,9 @@
 import { Router } from "express";
 import { verifyUser } from "../middlewares/auth.middleware";
-import { createOrg, getOrg } from "../controllers/org.controller";
+import { createBoard } from "../controllers/board.controller";
 
 const router = Router();
 
-router.post("/", verifyUser, createOrg);
-router.get("/", verifyUser, getOrg);
+router.post("/:orgId", verifyUser, createBoard);
 
 export default router;
