@@ -8,11 +8,13 @@ import authRouter from "./routes/auth.route";
 import orgRouter from "./routes/org.route";
 import boardRouter from "./routes/board.route";
 import sectionRouter from "./routes/section.route";
+import issueRouter from "./routes/issue.route";
 
 app.use("/api/auth", authRouter);
 app.use("/api/organization", orgRouter);
 app.use("/api/board", boardRouter);
 app.use("/api/section", sectionRouter);
+app.use("/api/issue", issueRouter);
 
 app.listen(3000, () => {
   console.log("Server Started at http://localhost:3000");
