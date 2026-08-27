@@ -45,7 +45,7 @@ issues           Issue[]
 }
 
 model Issue {
-id               String         @id   @default(uuid())
+id               String        @id   @default(uuid())
 title            String
 description      String
 boardId          String
