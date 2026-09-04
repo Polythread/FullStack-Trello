@@ -6,6 +6,7 @@ import { WsError } from "./utilis/wsError";
 import jwt from "jsonwebtoken";
 import { joinRoom } from "./events/joinRoom";
 import { BOARD } from "./store";
+import { moveIssue } from "./events/moveIssue";
 
 const wss = new WebSocketServer({ port: 8000 });
 
@@ -46,6 +47,9 @@ wss.on("connection", (ws: CustomWebSocket, req: Request) => {
     switch (event) {
       case "JOIN_BOARD":
         joinRoom(ws, data);
+        break;
+      case "MOVE_ISSUE":
+        await moveIssue(ws, data);
         break;
     }
   });
